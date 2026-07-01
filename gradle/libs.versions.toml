@@ -1,0 +1,71 @@
+[versions]
+# Pinned to 2.3.x: Kotlin 2.4.0 writes @Metadata that Hilt's bundled
+# kotlin-metadata-jvm (2.3.21) cannot read, which breaks Hilt annotation
+# processing in consuming apps. Bump back to the latest Kotlin once Hilt ships
+# a release built against kotlin-metadata-jvm >= 2.4.0.
+kotlin = "2.3.21"
+agp = "9.2.1"
+vanniktechPublish = "0.33.0"
+composeMultiplatform = "1.11.1"
+ktor = "3.5.0"
+coroutines = "1.11.0"
+serializationJson = "1.11.0"
+multiplatformSettings = "1.3.0"
+# Pinned below their latest: the newest Coil (3.5.0) and FileKit (0.14.2) ship Kotlin/Native
+# klibs built with the 2.4.0 compiler, whose ABI the project's pinned Kotlin 2.3.21 cannot
+# consume (iOS link fails with "incompatible ABI version '2.4.0'"). 3.4.0 / 0.13.0 are the
+# newest releases built with Kotlin <= 2.3.x. Bump both when Kotlin moves back to >= 2.4.0.
+coil = "3.4.0"
+filekit = "0.13.0"
+media3 = "1.10.1"
+jbLifecycle = "2.10.0"
+androidxComposeBom = "2026.05.00"
+activityCompose = "1.13.0"
+androidxStartup = "1.2.0"
+junit = "4.13.2"
+
+[plugins]
+android-kmp-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktechPublish" }
+
+[libraries]
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktor" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-websockets = { group = "io.ktor", name = "ktor-client-websockets", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializationJson" }
+coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+
+multiplatform-settings = { group = "com.russhwolf", name = "multiplatform-settings", version.ref = "multiplatformSettings" }
+multiplatform-settings-no-arg = { group = "com.russhwolf", name = "multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
+multiplatform-settings-test = { group = "com.russhwolf", name = "multiplatform-settings-test", version.ref = "multiplatformSettings" }
+
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-network-ktor3 = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
+filekit-dialogs-compose = { group = "io.github.vinceglb", name = "filekit-dialogs-compose", version.ref = "filekit" }
+media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3" }
+media3-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "media3" }
+
+jb-lifecycle-viewmodel-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "jbLifecycle" }
+jb-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "jbLifecycle" }
+
+androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidxStartup" }
+
+# sample-app only
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+
+# test
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
