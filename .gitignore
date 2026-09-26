@@ -63,3 +63,11 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+# Local Firebase configuration and build state
+**/google-services.json
+**/*service-account*.json
+local.properties
+.gradle/
+**/build/
+.DS_Store
