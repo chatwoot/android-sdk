@@ -1,14 +1,14 @@
 # Chatwoot Android SDK
 
-Native in-app support for Android: connect customers to a Chatwoot Website inbox using an SDK app ID. Includes a conversation list, chat UI, pre-chat form, attachments, live updates, and Firebase push integration.
+Native in-app support for Android: connect customers to a Chatwoot Mobile app inbox using an SDK app ID. Includes a conversation list, chat UI, pre-chat form, attachments, live updates, and Firebase push integration.
 
-This is an initial local preview. It requires the backend SDK integration changes; it is not yet published to Maven Central.
+This is an initial local preview. It requires the backend Mobile app channel changes; it is not yet published to Maven Central.
 
 ## Requirements
 
 - Android 8.0 (API 26) or later.
 - Java 17 to build this repository.
-- A Chatwoot instance with Settings → Integrations → SDKs enabled and a connected Website inbox.
+- A Chatwoot instance with a Mobile app channel created under Settings → Inboxes.
 - Firebase configuration only if you need push notifications.
 
 ## Install locally
@@ -32,7 +32,7 @@ Your project needs the Android library and Kotlin Android plugins and the Google
 
 ## Open support
 
-Create and reuse one client per SDK app:
+Create a **Mobile app** inbox under **Settings → Inboxes → Add inbox**, then copy its **SDK app ID** from the **Setup** tab. Create and reuse one client per inbox:
 
 ```kotlin
 val client = ChatwootClient(
@@ -59,7 +59,7 @@ Never embed the identity validation secret in the app. Call `client.reset()` and
 The host app owns Firebase and notification permission prompts. The SDK does not replace your existing `FirebaseMessagingService`.
 
 1. Register your Android package in Firebase and add `google-services.json` to your app module. Apply the Google Services Gradle plugin and add Firebase Messaging.
-2. Enable the Firebase Cloud Messaging HTTP v1 API. In Chatwoot, open your SDK app → Push notifications → Android, and enter the package name and Firebase project ID. Upload the project's service account JSON key there. **Never put the service account key in the Android app or this repository.**
+2. Enable the Firebase Cloud Messaging HTTP v1 API. In Chatwoot, open Settings → Inboxes → Your mobile inbox → Push notifications → Android, and enter the package name and Firebase project ID. Upload the project's service account JSON key there. **Never put the service account key in the Android app or this repository.**
 3. Call `Chatwoot.createNotificationChannel(context)` before receiving notifications. The channel ID is `chatwoot_support`.
 4. On Android 13+, request `POST_NOTIFICATIONS` in your host app. The SDK declares the manifest permission but does not prompt automatically.
 5. After connecting, retrieve `FirebaseMessaging.getInstance().token` and call `client.registerDeviceToken(token)`. Forward refreshed tokens from `FirebaseMessagingService.onNewToken` too. If registration fails, retry when your app next connects.
